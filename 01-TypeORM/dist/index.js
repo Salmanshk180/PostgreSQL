@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const typeorm_1 = require("typeorm");
-const Database_Configuration = require("./database_config");
 require("dotenv").config();
 const app = (0, express_1.default)();
 const port = 8000;
