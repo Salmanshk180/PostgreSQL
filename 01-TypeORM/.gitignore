@@ -1,4 +1,4 @@
 /node_modules
 /src
 /dist/database_config.js
-/env
+/.env
