@@ -9,32 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Profile = void 0;
 const typeorm_1 = require("typeorm");
-const Profile_1 = require("./Profile");
-let User = class User {
+let Profile = class Profile {
 };
-exports.User = User;
+exports.Profile = Profile;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], Profile.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], Profile.prototype, "gender", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-__decorate([
-    (0, typeorm_1.OneToOne)(() => Profile_1.Profile, { cascade: true }),
-    __metadata("design:type", Profile_1.Profile)
-], User.prototype, "profile", void 0);
-exports.User = User = __decorate([
+], Profile.prototype, "photo", void 0);
+exports.Profile = Profile = __decorate([
     (0, typeorm_1.Entity)()
-], User);
+], Profile);

@@ -16,6 +16,7 @@ require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const typeorm_1 = require("typeorm");
 const User_1 = require("./entities/User");
+const Profile_1 = require("./entities/Profile");
 require("dotenv").config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -44,13 +45,27 @@ createConnection
     console.log("Error connecting to database: " + err.message);
 });
 const userRepo = createConnection.getRepository(User_1.User);
+const profileRepo = createConnection.getRepository(Profile_1.Profile);
+const profile = {
+    id: "2",
+    gender: "male",
+    photo: "one",
+};
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield userRepo.find();
+    const users = yield userRepo.find({
+        where: { name: "abc" },
+    });
     res.json(users);
 }));
 app.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, name, email, password } = req.body;
-    const user = yield userRepo.insert({ id, name, email, password });
+    const user = new User_1.User();
+    user.id = id;
+    user.name = name;
+    user.email = email;
+    user.password = password;
+    user.profile = profile;
+    const userRes = yield userRepo.save(user);
     res.json(user);
 }));
 app.patch("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
