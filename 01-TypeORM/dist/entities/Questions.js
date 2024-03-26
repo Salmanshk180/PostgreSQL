@@ -9,33 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Question = void 0;
 const typeorm_1 = require("typeorm");
-const Profile_1 = require("./Profile");
-let User = class User {
+const Category_1 = require("./Category");
+let Question = class Question {
 };
-exports.User = User;
+exports.Question = Question;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", String)
-], User.prototype, "id", void 0);
+    __metadata("design:type", Number)
+], Question.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], Question.prototype, "title", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-__decorate([
-    (0, typeorm_1.OneToOne)(() => Profile_1.Profile, { cascade: true, eager: true }),
-    (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", Profile_1.Profile)
-], User.prototype, "profile", void 0);
-exports.User = User = __decorate([
+    (0, typeorm_1.ManyToMany)(() => Category_1.Category, { cascade: true }),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Array)
+], Question.prototype, "categories", void 0);
+exports.Question = Question = __decorate([
     (0, typeorm_1.Entity)()
-], User);
+], Question);

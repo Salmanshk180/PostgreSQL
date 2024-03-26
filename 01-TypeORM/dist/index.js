@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const typeorm_1 = require("typeorm");
-const User_1 = require("./entities/User");
-const Profile_1 = require("./entities/Profile");
+const Category_1 = require("./entities/Category");
+const Questions_1 = require("./entities/Questions");
 require("dotenv").config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -39,43 +39,178 @@ createConnection
     console.log("Database connected successfully...✅");
 })
     .then(() => {
-    app.listen(port, () => console.log("Server is listening on port", port));
+    app.listen(port, () => console.log("Server is listening on port", port, "...👂"));
 })
     .catch((err) => {
     console.log("Error connecting to database: " + err.message);
 });
-const userRepo = createConnection.getRepository(User_1.User);
-const profileRepo = createConnection.getRepository(Profile_1.Profile);
-const profile = {
-    id: "2",
-    gender: "male",
-    photo: "one",
-};
-app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield userRepo.find({
-        where: { name: "abc" },
-    });
-    res.json(users);
+// const userRepo = createConnection.getRepository(User);
+// const profileRepo = createConnection.getRepository(Profile);
+// const profile = new Profile();
+// profile.profile_id = "1";
+// profile.gender = "male";
+// profile.photo = "one";
+// app.get("/", async (req: express.Request, res: express.Response) => {
+//   const users = await userRepo.find();
+//   res.json(users);
+// });
+// app.post("/", async (req: express.Request, res: express.Response) => {
+//   const { id, name, email, password } = req.body;
+//   const user = new User();
+//   user.id = id;
+//   user.name = name;
+//   user.email = email;
+//   user.password = password;
+//   user.profile = profile;
+//   const userRes = await userRepo.save(user);
+//   res.json(userRes);
+// });
+// app.patch("/:id", async (req: express.Request, res: express.Response) => {
+//   const id = req.params.id;
+//   const { name, email, password, photo, gender } = req.body;
+//   const userFound = await userRepo.findOne({ where: { id: id } });
+//   if (userFound) {
+//     userFound.name = name;
+//     userFound.email = email;
+//     userFound.password = password;
+//     userFound.profile.gender = gender;
+//     userFound.profile.photo = photo;
+//     const updatedRecord = await userRepo.save(userFound);
+//     return res.json(updatedRecord);
+//   } else {
+//     return res.json({ error: "No Record Found 🚫" });
+//   }
+// });
+// app.delete("/:id", async (req: express.Request, res: express.Response) => {
+//   const id = req.params.id;
+//   const user = await userRepo.delete(id);
+//   res.json(user);
+// });
+// const productRepo = createConnection.getRepository(Product);
+// const companyRepo = createConnection.getRepository(Company);
+// app.post("/product", async (req: express.Request, res: express.Response) => {
+//   const { name, price, companyid } = req.body;
+//   try {
+//     const findCompany: Company | null = await companyRepo.findOne({
+//       where: { id: companyid },
+//     });
+//     if (!findCompany) {
+//       return res.status(404).send("Company not found");
+//     }
+//     const product = new Product();
+//     product.name = name;
+//     product.price = price;
+//     product.company = findCompany!; // Using non-null assertion operator
+//     const savedProduct = await productRepo.save(product);
+//     res.json(savedProduct);
+//   } catch (error) {
+//     console.error("Error creating product:", error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
+// app.post("/company", async (req: express.Request, res: express.Response) => {
+//   const { name, description } = req.body;
+//   const company = new Company();
+//   company.name = name;
+//   company.description = description;
+//   const comoanyAdded = await companyRepo.save(company);
+//   res.send(comoanyAdded);
+// });
+// app.get("/companies", async (req: express.Request, res: express.Response) => {
+//   const company = await companyRepo.find();
+//   res.json(company);
+// });
+// app.get("/products", async (req: express.Request, res: express.Response) => {
+//   const product = await productRepo.find({ relations: { company: true } });
+//   res.json(product);
+// });
+// app.patch(
+//   "/company/:id",
+//   async (req: express.Request, res: express.Response) => {
+//     const id = Number(req.params.id);
+//     const findCompany: Company | null = await companyRepo.findOne({
+//       where: { id: id },
+//     });
+//     if (findCompany === null) {
+//       res.json({ error: "Company not found!!! 🚫" });
+//     } else {
+//       const { name, description } = req.body;
+//       findCompany.name = name;
+//       findCompany.description = description;
+//       const updateCompany = await companyRepo.save(findCompany);
+//       res.json(updateCompany);
+//     }
+//   }
+// );
+// app.patch(
+//   "/product/:id",
+//   async (req: express.Request, res: express.Response) => {
+//     const id = req.params.id;
+//     const findProduct: Product | null = await productRepo.findOne({
+//       where: { id: id },
+//     });
+//     if (findProduct === null) {
+//       res.json({ error: "Product not found!!! 🚫" });
+//     } else {
+//       const { name, price } = req.body;
+//       findProduct.name = name;
+//       findProduct.price = price;
+//       const updateProduct = await productRepo.save(findProduct);
+//       res.json(updateProduct);
+//     }
+//   }
+// );
+// app.delete("/company/:id", async (req: express.Request, res: express.Response) =>{
+//   const id = Number(req.params.id);
+//   const findCompany: Company | null = await companyRepo.findOne({where:{ id: id}})
+//   if(findCompany === null) {
+//     res.json({ error: "Company not found!!!"});
+//   }
+//   else{
+//     const deletedCompany = await companyRepo.delete(id);
+//     res.json(deletedCompany);
+//   }
+// })
+// app.delete("/product/:id", async (req: express.Request, res: express.Response) =>{
+//   const id = req.params.id;
+//   const findProduct: Product | null = await productRepo.findOne({where:{ id: id}})
+//   if(findProduct === null) {
+//     res.json({ error: "Prodcut not found!!!"});
+//   }
+//   else{
+//     const deletedProduct = await productRepo.delete(id);
+//     res.json(deletedProduct);
+//   }
+// })
+const categoryRepo = createConnection.getRepository(Category_1.Category);
+const questionRepo = createConnection.getRepository(Questions_1.Question);
+app.post("/category", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title } = req.body;
+    const category = new Category_1.Category();
+    category.title = title;
+    const addCategory = yield categoryRepo.save(category);
+    res.json(addCategory);
 }));
-app.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id, name, email, password } = req.body;
-    const user = new User_1.User();
-    user.id = id;
-    user.name = name;
-    user.email = email;
-    user.password = password;
-    user.profile = profile;
-    const userRes = yield userRepo.save(user);
-    res.json(user);
+app.post("/question", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title, categories } = req.body;
+    const question = new Questions_1.Question();
+    question.title = title;
+    let category = yield categoryRepo.findOne({ where: { title: categories[0].title } });
+    if (!category) {
+        category = new Category_1.Category();
+        category.title = categories[0].title;
+        category = yield categoryRepo.save(category);
+    }
+    question.categories = [category];
+    const addQuestion = yield questionRepo.save(question);
+    res.json(addQuestion);
 }));
-app.patch("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get("/category", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const category = yield categoryRepo.find();
+    res.json(category);
+}));
+app.delete("/category/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const { name, email, password } = req.body;
-    const user = yield userRepo.update(id, { name, email, password });
-    res.json(user);
-}));
-app.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.params.id;
-    const user = yield userRepo.delete(id);
-    res.json(user);
+    const deleteCategory = yield categoryRepo.delete(id);
+    res.json(deleteCategory);
 }));

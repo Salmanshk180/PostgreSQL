@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "nodemon ./dist/index.js",
+    "build":"tsc -p",
     "start:dev": "nodemon ./src/index.ts"
   },
   "keywords": [],
@@ -16,7 +17,6 @@
     "express": "^4.18.3",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1",
-    "ts-node": "^10.9.2",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
