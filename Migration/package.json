@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "nodemon ./dist/index.js",
-    "build":"tsc -p",
+    "build": "tsc -p",
     "start:dev": "nodemon ./src/index.ts",
-    "migration:run":"npx typeorm-ts-node-commonjs  migration:run --d ./src/data-source.ts",
-    "migration:revert":"npx typeorm-ts-node-commonjs  migration:revert --d ./src/data-source.ts"
+    "migration:run": "npx typeorm-ts-node-commonjs  migration:run --d ./src/data-source.ts",
+    "migration:revert": "npx typeorm-ts-node-commonjs  migration:revert --d ./src/data-source.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "reflect-metadata": "^0.2.1",
     "ts-node": "^10.9.2",
     "typeorm": "^0.3.20",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "uuid": "^9.0.1"
   }
 }
